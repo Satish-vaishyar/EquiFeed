@@ -49,8 +49,19 @@ export default function SignUp() {
   const finalizeSignUp = async (sessionId: string) => {
     if (finalizing) return;
     setFinalizing(true);
-    await setSignUpActive({ session: sessionId });
-    navigate('/onboarding');
+    try {
+      if (!setSignUpActive) {
+        setError('Could not start your session. Please sign in again.');
+        return;
+      }
+
+      await setSignUpActive({ session: sessionId });
+      navigate('/onboarding');
+    } catch (err) {
+      setError(getClerkError(err, 'Unable to finalize signup.'));
+    } finally {
+      setFinalizing(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {

@@ -7,7 +7,7 @@ interface ProfileGridProps {
 }
 
 export function ProfileGrid({ posts }: ProfileGridProps) {
-  const [selected, setSelected] = useState<Post | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   if (posts.length === 0) {
     return (
@@ -22,10 +22,10 @@ export function ProfileGrid({ posts }: ProfileGridProps) {
   return (
     <>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 1 }}>
-        {posts.map((post) => (
+        {posts.map((post, index) => (
           <button
             key={post.id}
-            onClick={() => setSelected(post)}
+            onClick={() => setSelectedIndex(index)}
             style={{
               aspectRatio: '1 / 1',
               overflow: 'hidden',
@@ -46,7 +46,11 @@ export function ProfileGrid({ posts }: ProfileGridProps) {
           </button>
         ))}
       </div>
-      <PostDetailSheet post={selected} onClose={() => setSelected(null)} />
+      <PostDetailSheet
+        posts={posts}
+        initialIndex={selectedIndex}
+        onClose={() => setSelectedIndex(null)}
+      />
     </>
   );
 }

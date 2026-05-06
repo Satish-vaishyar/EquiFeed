@@ -8,7 +8,7 @@ interface TrendingContentProps {
 }
 
 export function TrendingContent({ posts }: TrendingContentProps) {
-  const [selected, setSelected] = useState<Post | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   return (
     <>
@@ -16,7 +16,7 @@ export function TrendingContent({ posts }: TrendingContentProps) {
         {posts.map((post, i) => (
           <button
             key={post.id}
-            onClick={() => setSelected(post)}
+            onClick={() => setSelectedIndex(i)}
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -58,7 +58,11 @@ export function TrendingContent({ posts }: TrendingContentProps) {
           </button>
         ))}
       </div>
-      <PostDetailSheet post={selected} onClose={() => setSelected(null)} />
+      <PostDetailSheet
+        posts={posts}
+        initialIndex={selectedIndex}
+        onClose={() => setSelectedIndex(null)}
+      />
     </>
   );
 }
