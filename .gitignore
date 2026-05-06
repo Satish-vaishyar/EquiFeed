@@ -1,0 +1,56 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.suo
+*.swp
+
+# Git metadata backups / local agent folders
+.claude/
+.qodo/
+Frontend-Focus/.git_backup_inner/
+AGENTS.md
+
+# Node / Next.js
+**/node_modules/
+**/.next/
+**/dist/
+**/coverage/
+**/*.tsbuildinfo
+
+# Package manager caches
+**/.pnpm-store/
+**/.npm/
+**/.yarn/
+Frontend-Focus/.local/
+
+# Python
+**/__pycache__/
+**/*.pyc
+**/.venv/
+**/.uv-cache/
+**/.uv-python/
+**/.pytest_cache/
+
+# Env / secrets
+**/.env
+**/.env.local
+**/.env.*.local
+!**/.env.example
+
+# Logs / runtime artifacts
+*.log
+*.out
+*.err
+**/*.log
+**/*.out.log
+**/*.err.log
+Frontend-Focus/artifacts/equifeed/out.json
+**/.replit-artifact/
+Frontend-Focus/attached_assets/
+
+# Temp
+tmp/
+temp/
+scratch/

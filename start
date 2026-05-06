@@ -1,0 +1,2 @@
+cd E:\Frontend-Focus\Frontend-Focus
+corepack pnpm --filter @workspace/equifeed run dev
