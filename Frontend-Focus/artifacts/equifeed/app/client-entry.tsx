@@ -29,7 +29,7 @@ export default function ClientEntry() {
     }
 
     const register = () => {
-      navigator.serviceWorker.register("/sw.js").catch(() => {
+      navigator.serviceWorker.register("/sw.js", { scope: "/", updateViaCache: "none" }).catch(() => {
         // Silent fail keeps UI stable when service workers are blocked.
       });
     };

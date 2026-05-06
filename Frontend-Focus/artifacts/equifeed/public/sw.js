@@ -1,9 +1,19 @@
-const CACHE_NAME = "equifeed-v1";
-const PRECACHE_URLS = ["/", "/manifest.webmanifest"];
+const CACHE_NAME = "equifeed-v2";
+const APP_SHELL_URLS = [
+  "/",
+  "/manifest.webmanifest",
+  "/favicon.svg",
+  "/icons/icon-192.png",
+  "/icons/icon-512.png",
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_URLS)),
+    caches.open(CACHE_NAME).then(async (cache) => {
+      await Promise.allSettled(
+        APP_SHELL_URLS.map((url) => cache.add(new Request(url, { cache: "reload" }))),
+      );
+    }),
   );
   self.skipWaiting();
 });
@@ -30,13 +40,47 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
+  const url = new URL(request.url);
+  if (url.origin !== self.location.origin) {
+    return;
+  }
+
+  if (request.mode === "navigate") {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put("/", copy)).catch(() => {});
+          return response;
+        })
+        .catch(async () => {
+          const cachedAppShell = await caches.match("/");
+          if (cachedAppShell) {
+            return cachedAppShell;
+          }
+          return Response.error();
+        }),
+    );
+    return;
+  }
+
   event.respondWith(
-    fetch(request).catch(async () => {
-      const cached = await caches.match(request);
+    caches.match(request).then((cached) => {
       if (cached) {
+        fetch(request)
+          .then((networkResponse) =>
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, networkResponse.clone())),
+          )
+          .catch(() => {});
         return cached;
       }
-      return caches.match("/");
+      return fetch(request)
+        .then((networkResponse) => {
+          const copy = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, copy)).catch(() => {});
+          return networkResponse;
+        })
+        .catch(() => Response.error());
     }),
   );
 });
