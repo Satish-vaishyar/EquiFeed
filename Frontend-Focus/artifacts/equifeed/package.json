@@ -4,10 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node ./scripts/dev-host.mjs",
+    "dev": "next dev --hostname 0.0.0.0",
     "dev:pwa": "next dev --hostname localhost",
     "build": "next build && echo NEXT_BUILD_DONE",
-    "serve": "node ./scripts/serve-host.mjs",
+    "serve": "next start --hostname 0.0.0.0",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "engines": {
