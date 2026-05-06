@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  transpilePackages: ["@workspace/api-client-react", "@workspace/db"],
+  transpilePackages: ["@workspace/db"],
   webpack(config, { dev }) {
     if (dev) {
       config.cache = false;
