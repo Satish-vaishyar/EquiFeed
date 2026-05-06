@@ -24,7 +24,7 @@ const App = dynamic(() => import("../src/App"), {
 
 export default function ClientEntry() {
   useEffect(() => {
-    if (!("serviceWorker" in navigator)) {
+    if (typeof window === "undefined" || !("serviceWorker" in navigator) || !window.isSecureContext) {
       return;
     }
 

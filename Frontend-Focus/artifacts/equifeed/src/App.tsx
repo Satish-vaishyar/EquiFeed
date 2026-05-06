@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 import { BottomNav } from "./components/layout/BottomNav";
-import { InstallPrompt } from "./components/layout/InstallPrompt";
 import { useUserStore } from "./store/userStore";
 
 import SignIn from "./views/SignIn";
@@ -135,7 +134,6 @@ function AppLayout() {
           </Route>
         </Switch>
       </main>
-      <InstallPrompt />
       <BottomNav />
     </div>
   );
