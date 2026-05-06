@@ -10,15 +10,9 @@ const nextConfig: NextConfig = {
       "../../.git_backup_inner/**/*",
       "../../scratch/**/*",
       "../../.local/**/*",
+      "../../scoring-engine/**/*",
       "../../**/*.log",
     ],
-  },
-  webpack(config, { dev }) {
-    if (dev) {
-      config.cache = false;
-    }
-
-    return config;
   },
 };
 
