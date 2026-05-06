@@ -10,7 +10,7 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 
-DEFAULT_BASE_URL = "http://127.0.0.1:8081"
+DEFAULT_BASE_URL = "http://35.244.13.244/"
 
 
 def main() -> int:

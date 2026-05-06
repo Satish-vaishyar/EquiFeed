@@ -6,7 +6,7 @@ import { requireCurrentDbUser } from "../_lib/users";
 import type { ContentType } from "../../../src/types";
 
 const SCORING_ENGINE_URL =
-  process.env.SCORING_ENGINE_URL ?? "http://127.0.0.1:8081";
+  process.env.SCORING_ENGINE_URL ?? "http://35.244.13.244/";
 
 export const runtime = "nodejs";
 

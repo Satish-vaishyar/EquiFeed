@@ -3,7 +3,7 @@ import { db, postsTable } from "@workspace/db";
 import { count, avg, desc } from "drizzle-orm";
 
 const SCORING_ENGINE_URL =
-  process.env.SCORING_ENGINE_URL ?? "http://127.0.0.1:8081";
+  process.env.SCORING_ENGINE_URL ?? "http://35.244.13.244/";
 
 export async function POST(req: Request) {
   try {
