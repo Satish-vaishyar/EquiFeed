@@ -136,6 +136,9 @@ importers:
 
   .:
     devDependencies:
+      next:
+        specifier: ^15.5.15
+        version: 15.5.15(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       prettier:
         specifier: ^3.8.1
         version: 3.8.1
